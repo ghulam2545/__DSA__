@@ -14,7 +14,9 @@ int main() {
     }
     unordered_map<int,int>::iterator it;
     for(it=m.begin(); it!=m.end(); it++) {
-        cout<<(*it).first<<"  "<<(*it).second<<"\n";
+    	if((*it).second == 1) {
+    		cout<<(*it).first;	
+		}
     }
     return 0;
 }

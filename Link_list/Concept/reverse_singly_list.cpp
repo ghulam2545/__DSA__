@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 #include <stack>
-
 struct Node {
 	int data;
 	Node *next;
