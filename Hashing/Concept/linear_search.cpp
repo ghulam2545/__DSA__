@@ -1,21 +1,30 @@
-#include<iostream>
-
+#include <bits/stdc++.h>
+using namespace std;
 struct Search {
-	void no_repetition_search();
+    void search();
 };
 int main() {
-	
-	
-	
-	
-	return 0;
+    Search aa;
+    aa.search();
+    return 0;
 }
 
-void Search::no_repetition_search() {
-	const std::string name = "abcgrtyeuwioqmlz";
-	int size = name.size();
-	int arr[size];
-	for(int i=0; i<size; i++) {
-		arr[i] = name[i];
-	}
+void Search::search() {
+    int n;
+    cin >> n;
+    list<int> v[10];
+    int _input = 0;
+    int rem = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> _input;
+        rem = _input % 10;
+        v[rem].push_back(_input);
+    }
+    int data; cin>>data;
+	rem = data % 10;
+	bool ans = false;
+	for (int& e:v[rem]) {
+		if(data == e) ans = true; 
+	} 
+	ans == true ? cout<<"YES\n" : cout<<"NO\n"; 
 }
