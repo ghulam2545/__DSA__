@@ -1,0 +1,15 @@
+Sortinh Algorithm---
+
+--> Selection Sort :
+select minium element from left hand and shift this in right hand, again select minium element (form remaining element) and shift to hand (at the end);
+
+
+--> Bubble Sort :
+compare first two adjecent element (swap if need), do this for next two and so on, at first pass max element will be bubbled up.
+
+
+--> Insertion Sort :
+first element consider as sorted and remaining as unsorted, pick first element form unsorted and place it in sorted part at right place.
+
+
+--> Merge Sort :
