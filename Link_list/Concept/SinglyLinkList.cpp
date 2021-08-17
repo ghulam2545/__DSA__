@@ -15,8 +15,8 @@ struct Node {
     Node* ReverseList_1(Node* head);
     Node* ReverseList_2(Node* head);
 
-    void PrintForward(Node* ptr);
-    void PrintBackward(Node* ptr);
+    void PrintForward(Node* head);
+    void PrintBackward(Node* head);
 };
 Node *head = nullptr, *curr = nullptr;
 
@@ -31,8 +31,9 @@ int main() {
 
     aa->PrintForward(head);
     cout << "\n\n";
-
     aa->PrintForward(aa->ReverseList_1(head));
+    cout << "\n\n";
+    // aa->PrintForward(aa->ReverseList_2(head));
     //    aa->PrintBackward(head);
     return 0;
 }
@@ -85,34 +86,60 @@ Node* Node::InsertAtPerticular(int value) {
 }
 Node* Node::DeleteAtEnd() {}
 Node* Node::DeleteAtBegin() {}
-Node* Node::ReverseList_1(Node* p) {
-    if (p == nullptr) {
+Node* Node::ReverseList_1(Node* head) {
+    if (head == nullptr) {
         cout << "Empty : ";
         return head;
-    } else {
-        if (p->link == nullptr) {
-            head = p;
-            return head;
-        }
-        ReverseList_1(p->link);
-        Node* q = p->link;
-        q->link = p;
-        p->link = nullptr;
+    } else if (head->link == nullptr) {
         return head;
+    } else {
+        Node *Prev = nullptr, *Next = head, *Curr = head;
+        while (Curr != nullptr) {
+            Next = Curr->link;
+            Curr->link = Prev;
+            Prev = Curr;
+            Curr = Next;
+        }
+        head = Prev;
     }
+    return head;
 }
 
-void Node::PrintForward(Node* ptr) {
-    if (ptr == nullptr) {
-        return;
+// Fix it
+Node* Node::ReverseList_2(Node* head) {
+    curr = head;
+    stack<int> cont;
+    while (curr != nullptr) {
+        cont.push(curr->data);
+        curr = curr->link;
     }
-    cout << ptr->data << " ";
-    PrintForward(ptr->link);
+    curr = nullptr;
+    while (cont.size()) {
+        Node* temp = getNewNode(cont.top());
+        if (curr == nullptr) {
+            curr = temp;
+        } else {
+            while (curr->link != nullptr) {
+                curr = curr->link;
+            }
+            curr = temp;
+        }
+        cont.pop();
+    }
+    return curr;
 }
-void Node::PrintBackward(Node* ptr) {
-    if (ptr == nullptr) {
+
+void Node::PrintForward(Node* head) {
+    if (head == nullptr) {
         return;
     }
-    PrintBackward(ptr->link);
-    cout << ptr->data << " ";
+    cout << head->data << " ";
+    PrintForward(head->link);
+}
+void Node::PrintBackward(Node* head) {
+    if (head == nullptr) {
+        return;
+    }
+    PrintBackward(head->link);
+    cout << head->data << " ";
 }

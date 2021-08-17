@@ -9,6 +9,7 @@ struct Node {
     Node* InsertAtHead(int data);
     void print(Node* head);
     void reversePrint(Node* head);
+    void Search(Node* head, int val);
 };
 Node* head = nullptr;
 int main() {
@@ -18,11 +19,14 @@ int main() {
     aa->InsertAtTail(33);
     aa->InsertAtTail(45);
     aa->InsertAtHead(99);
-	aa->InsertAtHead(88);
+    aa->InsertAtHead(88);
     aa->InsertAtHead(77);
-	aa->print(head);
-    cout<<"\n\n";
+    aa->print(head);
+    cout << "\n\n";
     aa->reversePrint(head);
+    cout<<"\n";
+    aa->Search(head, 45);
+    aa->Search(head, 55);
 
     return 0;
 }
@@ -81,4 +85,18 @@ void Node::reversePrint(Node* head) {
         cout << head->data << " ";
         head = head->prev;
     }
+}
+void Node::Search(Node* head, int val) {
+    bool ans = false;
+    if (head == nullptr) {
+        return;
+    }
+    while (head != nullptr) {
+        if (head->data == val) {
+            ans = true;
+        	break;
+		}
+        head = head->next;
+    }
+    ans == true ? cout << "Founded \n" : cout << "Not Founded \n";
 }

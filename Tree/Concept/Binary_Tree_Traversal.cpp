@@ -10,6 +10,7 @@ Node* InsertNode(Node* head, int value);
 void PreOder(Node* head);
 void PostOrder(Node* head);
 void InOrder(Node* head);
+void LevelOreder(Node* head);
 
 int main() {
     root = InsertNode(root, 12);
@@ -18,12 +19,14 @@ int main() {
     root = InsertNode(root, 45);
     root = InsertNode(root, 32);
     root = InsertNode(root, 31);
-    cout<<"PreOrder : \n";
+    cout << "PreOrder : \n";
     PreOder(root);
-    cout<<"\n\nPostOrder : \n";
+    cout << "\n\nPostOrder : \n";
     PostOrder(root);
-    cout<<"\n\nInOrder : \n";
+    cout << "\n\nInOrder : \n";
     InOrder(root);
+    cout << "\n\nLevelOrder : \n";
+    LevelOreder(root);
 
     return 0;
 }
@@ -67,4 +70,25 @@ void InOrder(Node* head) {
     InOrder(head->left);
     cout << head->data << " ";
     InOrder(head->right);
+}
+
+// BFS
+void LevelOreder(Node* head) {
+    if (head == nullptr) {
+        return;
+    }
+    Node* temp;
+    queue<Node*> qq;
+    qq.push(head);
+    while (qq.size()) {
+        temp = qq.front();
+        cout << temp->data << " ";
+        if (temp->left != nullptr) {
+            LevelOreder(temp->left);
+        }
+        if (temp->right != nullptr) {
+            LevelOreder(temp->right);
+        }
+        qq.pop();
+    }
 }
