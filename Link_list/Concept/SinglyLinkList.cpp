@@ -8,12 +8,12 @@ struct Node {
     Node* InsertAtBegin(int value);
     Node* InsertAtPerticular(int value);
 
-    Node* DeleteAtEnd();
-    Node* DeleteAtBegin();
-    Node* DeleteAtPerticular();
+    Node* DeleteAtEnd(Node* head);
+    Node* DeleteAtBegin(Node* head);
+    Node* DeleteAtPerticular(Node* head);
 
-    Node* ReverseList_1(Node* head);
-    Node* ReverseList_2(Node* head);
+    Node* ReverseList_InPlace(Node* head);
+    Node* ReverseList_UsingStack(Node* head);
 
     void PrintForward(Node* head);
     void PrintBackward(Node* head);
@@ -30,11 +30,10 @@ int main() {
     aa->InsertAtBegin(77);
 
     aa->PrintForward(head);
+//    cout << "\n\n";
+//    aa->PrintForward(aa->ReverseList_UsingStack(head));
     cout << "\n\n";
-    aa->PrintForward(aa->ReverseList_1(head));
-    cout << "\n\n";
-    // aa->PrintForward(aa->ReverseList_2(head));
-    //    aa->PrintBackward(head);
+
     return 0;
 }
 
@@ -84,9 +83,26 @@ Node* Node::InsertAtPerticular(int value) {
     // ptr->link = right;
     // return head;
 }
-Node* Node::DeleteAtEnd() {}
-Node* Node::DeleteAtBegin() {}
-Node* Node::ReverseList_1(Node* head) {
+Node* Node::DeleteAtEnd(Node* head) {
+    if (head == nullptr) {
+        cout << "Empty : ";
+    } else if (head->link == nullptr) {
+        Node* temp = head;
+        head = nullptr;
+        free(temp);
+    } else {
+        Node* temp = head;
+        while (temp->link->link != nullptr) {
+            temp = temp->link;
+        }
+        Node* toBeDelete = temp->link;
+        temp = nullptr;
+        free(toBeDelete);
+    }
+    return head;
+}
+Node* Node::DeleteAtBegin(Node* head) {}
+Node* Node::ReverseList_InPlace(Node* head) {
     if (head == nullptr) {
         cout << "Empty : ";
         return head;
@@ -104,25 +120,23 @@ Node* Node::ReverseList_1(Node* head) {
     }
     return head;
 }
-
-// Fix it
-Node* Node::ReverseList_2(Node* head) {
-    curr = head;
+Node* Node::ReverseList_UsingStack(Node* head) {
     stack<int> cont;
-    while (curr != nullptr) {
-        cont.push(curr->data);
-        curr = curr->link;
+    while (head != nullptr) {
+        cont.push(head->data);
+        head = head->link;
     }
     curr = nullptr;
-    while (cont.size()) {
+    while (!cont.empty()) {
         Node* temp = getNewNode(cont.top());
         if (curr == nullptr) {
             curr = temp;
         } else {
-            while (curr->link != nullptr) {
-                curr = curr->link;
+            Node* tt = curr;
+            while (tt->link != nullptr) {
+                tt = tt->link;
             }
-            curr = temp;
+            tt->link = temp;
         }
         cont.pop();
     }
