@@ -9,11 +9,12 @@ struct Graph {
     bool* visit;
     Graph();
     void Print();
-    void BFS(int root);
+    void BFS(int nodeValue);
 };
 int main() {
     Graph aa;
     aa.Print();
+    aa.BFS(0);
 
     return 0;
 }
@@ -40,14 +41,28 @@ void Graph::Print() {
 }
 
 // unc...
-void Graph::BFS(int root) {
+void Graph::BFS(int nodeValue) {
     queue<int> qq;
-    qq.push(root);
-    while(!qq.empty) {
+    qq.push(nodeValue);
+    visit[nodeValue] = true;
+    while (!qq.empty()) {
         int data = qq.front();
-        data = 
-
+        cout << data << " ";
+        qq.pop();
+        for (auto i = ls[nodeValue].begin(); i != ls[nodeValue].end(); i++) {
+            if (!visit[*i]) {
+                visit[*i] = true;
+                qq.push(*i);
+            }
+        }
     }
-
-
 }
+
+/*
+4
+3
+0 1
+0 2
+2 3
+
+*/

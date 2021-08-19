@@ -5,12 +5,14 @@ struct Node {
     Node* left;
     Node* right;
 }* root = nullptr;
+int found = false;
 Node* GetNewNode(int value);
 Node* InsertNode(Node* head, int value);
 void PreOder(Node* head);
 void PostOrder(Node* head);
 void InOrder(Node* head);
 void LevelOreder(Node* head);
+bool search(Node* head, int val);
 
 int main() {
     root = InsertNode(root, 12);
@@ -27,7 +29,11 @@ int main() {
     InOrder(root);
     cout << "\n\nLevelOrder : \n";
     LevelOreder(root);
-
+    cout<<"\n\nSearch : ";
+    cout<<search(root, 45);
+	cout<<"\n\nSearch : ";
+    cout<<search(root, 415);
+    
     return 0;
 }
 Node* GetNewNode(int value) {
@@ -84,11 +90,20 @@ void LevelOreder(Node* head) {
         temp = qq.front();
         cout << temp->data << " ";
         if (temp->left != nullptr) {
-            LevelOreder(temp->left);
+            qq.push(temp->left);
         }
         if (temp->right != nullptr) {
-            LevelOreder(temp->right);
+            qq.push(temp->right);
         }
         qq.pop();
     }
+}
+bool search(Node* head, int val) {
+	if(head == nullptr) {
+		return false;
+	}
+	if(head->data == val) {
+		return true;
+	}
+	return (search(head->left, val) || search(head->right, val));
 }
