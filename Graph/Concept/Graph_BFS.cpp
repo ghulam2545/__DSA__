@@ -14,7 +14,7 @@ struct Graph {
 int main() {
     Graph aa;
     aa.Print();
-    aa.BFS(0);
+    aa.BFS(2);
 
     return 0;
 }
@@ -26,43 +26,51 @@ Graph::Graph() {
         ls[u].push_back(v);
         ls[v].push_back(u);
     }
-    visit = new bool[_e];
-    for (int i = 0; i < _e; i++) {
-        visit[i] = false;
-    }
+    
 }
 void Graph::Print() {
     for (int i = 0; i < _v; i++) {
         cout << i << "----> ";
-        for (int& e : ls[i]) cout << e << " ";
+        for(auto it=ls[i].begin(); it!=ls[i].end(); it++) {
+        	cout<<(*it)<<" ";
+		}
         cout << "\n";
     }
     cout << "\n\n\n\n";
 }
 
-// unc...
 void Graph::BFS(int nodeValue) {
+	visit = new bool[_v];
+    for (int i = 0; i < _v; i++) {
+        visit[i] = false;
+    }
     queue<int> qq;
     qq.push(nodeValue);
     visit[nodeValue] = true;
+    int num = 0;
     while (!qq.empty()) {
-        int data = qq.front();
-        cout << data << " ";
+        num = qq.front();
+        cout << num << " ";
         qq.pop();
-        for (auto i = ls[nodeValue].begin(); i != ls[nodeValue].end(); i++) {
+        for (auto i = ls[num].begin(); i != ls[num].end(); i++) {
             if (!visit[*i]) {
                 visit[*i] = true;
                 qq.push(*i);
             }
         }
+        
     }
 }
 
 /*
-4
-3
-0 1
-0 2
+6
+7
+1 0
+1 3
+1 4
+0 4
+4 5
+5 2 
 2 3
 
 */

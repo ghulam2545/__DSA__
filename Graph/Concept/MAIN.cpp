@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <list>
+#include <queue>
 #include <vector>
 using namespace std;
 template <typename T>
@@ -9,25 +10,35 @@ class Graph {
    private:
     int _vertex, _edges;
     int u, v, w;
+    bool* visit;
     vector<pair<int, int>>* ls;
 
    public:
     Graph();
     void MakeGraph();
     void Print();
-    ~Graph();
+    void DFS(int nodeVal);
+    void BFS(int nodeVal);
+    ~Graph() {}
 };
 int main() {
     Graph<int>* oo;
     oo = new Graph<int>();
     oo->MakeGraph();
     oo->Print();
+    cout<<"\n";
+    oo->BFS(1);
 
     return 0;
 }
 
 template <typename T>
-Graph<T>::Graph() {}
+Graph<T>::Graph() {
+    visit = new bool[_vertex];
+    for (int i = 0; i < _vertex; i++) {
+        visit[i] = false;
+    }
+}
 
 template <typename T>
 void Graph<T>::MakeGraph() {
@@ -58,14 +69,54 @@ void Graph<T>::Print() {
     }
 }
 
+template <typename T>
+void Graph<T>::DFS(int nodeVal) {
+    visit[nodeVal] = true;
+    cout << nodeVal << " ";
+    vector<pair<int, int>> temp;
+    for (auto it = ls[nodeVal].begin(); it != ls[nodeVal].end(); it++) {
+        if (!visit[(*it).first]) {
+            DFS((*it).first);
+        }
+    }
+}
+
+template <typename T>
+void Graph<T>::BFS(int nodeVal) {
+    visit[nodeVal] = true;
+    queue<int> qq;
+    qq.push(nodeVal);
+    int num = 0;
+    while (!qq.empty()) {
+        num = qq.front();
+        cout << num << " ";
+        for (auto i = ls[num].begin(); i != ls[num].end(); i++) {
+            if (!visit[(*i).first]) {
+                visit[(*i).first] = true;
+                qq.push((*i).first);
+            }
+        }
+        qq.pop();
+    }
+}
 
 /*
-
-4
-4
-0 2 10
-2 1 20
-2 3 40
-1 3 30
+9
+12
+0 1 10
+0 8 20
+7 1 30
+7 8 40
+2 7 70
+2 3 80
+7 3 60
+3 4 90
+4 5 120
+6 4 100
+6 5 110
+6 8 50
 
 */
+
+
+
