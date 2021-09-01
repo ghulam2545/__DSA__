@@ -32,7 +32,8 @@ Graph::Graph() {
 }
 void Graph::printGraphList() {
     for (auto i = 0; i < v; i++) {
-        std::cout  << i << "--->" << " ";
+        std::cout << i << "--->"
+                  << " ";
         for (auto j : ls[i]) {
             std::cout << j << " ";
         }

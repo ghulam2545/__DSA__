@@ -47,7 +47,7 @@ void Graph<T>::MakeGraph() {
     cout << "Enter number of edges : ";
     cin >> _edges;
     cout << "Enter connection and weight : ";
-    ls = new vector<pair<int, int>>[_edges];
+    ls = new vector<pair<int, int>>[_vertex];
     for (int i = 0; i < _edges; i++) {
         cin >> u >> v >> w;
         ls[u].push_back({v, w});
@@ -57,7 +57,7 @@ void Graph<T>::MakeGraph() {
 
 template <typename T>
 void Graph<T>::Print() {
-    for (int i = 0; i < _edges; i++) {
+    for (int i = 0; i < _vertex; i++) {
         cout << i << "---> ";
         vector<pair<int, int>>::iterator it;
         for (it = ls[i].begin(); it != ls[i].end(); it++) {
