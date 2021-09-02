@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 class Node {
     int data;
@@ -13,6 +14,34 @@ class Node {
     Node* insertNode(Node* root, int insertVal);
     void levelOrder(Node* root);
     void inorder(Node* root);
+
+	void postorderIterative(Node* root)
+{
+    stack<Node*> s;
+    s.push(root);
+    stack<int> out;
+    while (!s.empty())
+    {
+        Node* curr = s.top();
+        s.pop();
+ 
+        
+		
+		out.push(curr->data);
+        if (curr->left) {
+            s.push(curr->left);
+        }
+ 
+        if (curr->right) {
+            s.push(curr->right);
+        }
+    }
+    while (!out.empty())
+    {
+        cout << out.top() << " ";
+        out.pop();
+    }
+}
 };
 int main() {
     Node* head = NULL;
@@ -32,6 +61,8 @@ int main() {
     oo->levelOrder(head);
     cout<<"\n\n";
     oo->inorder(head);
+    cout<<"fioor \n";
+    oo->postorderIterative(head);
     
     
 	return 0;
@@ -69,8 +100,7 @@ Node* Node::insertNode(Node* root, int insertVal) {
             	return root;
 			}
         }
-    }   
-    return root;
+    }
 }
 void Node::levelOrder(Node* root) {
     if(root == NULL) {
@@ -99,7 +129,8 @@ void Node::inorder(Node* root) {
     }
     else {
         inorder(root->left);
-        cout<<root->data<<" ";
+        
         inorder(root->right);
+        cout<<root->data<<" ";
     }
 }
