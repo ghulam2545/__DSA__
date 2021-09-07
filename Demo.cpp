@@ -1,14 +1,18 @@
-// Print all connected component in graph in new line
-
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-	string a = "ab";
-	string b = "cd";
-	cout<<(a>b); 
-	
-	
-	
+    std::set<int> s;
+    s.insert(12);
+    s.insert(20);
+    s.insert(13);
+    s.insert(4);
+    s.insert(0);
+    s.insert(-5);
+
+    for (auto& e : s) {
+        cout << e << " ";
+    }
+
     return 0;
 }
