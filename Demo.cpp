@@ -1,24 +1,35 @@
 #include <iostream>
 #include <vector>
-void f(std::vector<std::string>& ref) {
-    for (std::string& e : ref) std::cout << e << " ";
-}
 
-std::vector<std::string>& _f() {
-    static std::vector<std::string> v = {"11", "22", "33"};  // always static
-    return v;
+struct sample {
+    template <typename T> constexpr const T &max(const T &a, const T &b) { return a > b ? a : b; }
+    template <typename T> constexpr const T &min(const T &a, const T &b) { return a > b ? b : a; }
+};
+
+constexpr const sum(const int *arr, const int &size) {
+    int ans = 0;
+    for (int i = 0; i < size; i++) {
+        ans += arr[i];
+    }
+    return ans;
 }
 
 int main() {
-    std::vector<std::string> dummy;
-    dummy.push_back("one");
-    dummy.push_back("two");
-    dummy.push_back("three");
-    dummy.push_back("four");
-    dummy.push_back("five");
-    f(dummy);
-    std::vector<std::string> number = _f();
-    for (std::string& e : number) std::cout << e << " ";
-
+    int *num;
+    int m;
+    std::cin >> m;
+    num = new int[m];
+    for (int i = 0; i < m; i++) {
+        std::cin >> num[i];
+    }
+    std::cout << sum(num, m);
+    // sample *instance;
+    // int a, b;
+    // std::cin >> a >> b;
+    // std::cout << instance->max(a, b);
+    // std::cout << instance->min(a, b);
+    // std::cout << "\n\n";
+    // ++a;
+    // std::cout << a;
     return 0;
 }
