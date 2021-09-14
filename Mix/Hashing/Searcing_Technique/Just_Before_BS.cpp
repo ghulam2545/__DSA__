@@ -5,7 +5,7 @@ int f_1(int* arr, int& size, int& data);
 int main() {
     int num[] = {23, 33, 37, 50, 66, 67, 99};
     int n = sizeof(num) / sizeof(num[0]);
-    int toSearch = 37;
+    int toSearch = 36;
     cout << f_1(num, n, toSearch) << "\n\n";
 
     return 0;
