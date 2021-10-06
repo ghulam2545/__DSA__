@@ -1,53 +1,45 @@
-// // we have multiple string and has to find in O(1)
-
-// #include <iostream>
-// #include <unordered_map>
-// #include <vector>
-// class Hashing {
-//    public:
-//     std::unordered_map<int, std::string> *table;
-//     Hashing();
-//     int hashFunc(const std::string &data);
-// };
-
-// int main() {
-//     std::vector<std::string> allNames = {"manuu", "rafeeq", "jameel", "saba", "noor", "ali"};
-//     Hashing *ins = new Hashing();
-//     for (int i = 0; i < allNames.size(); i++) {
-//         int key = ins->hashFunc(allNames[i]);
-//         ins->table->insert({key, allNames[i]});
-//     }
-//     for (int i = 0; i < allNames.size(); i++) {
-//         std::cout << ins->table[i] << "\n";
-//     }
-
-//     return 0;
-// }
-// Hashing::Hashing() { table = new std::unordered_map<int, std::string>; }
-// int Hashing::hashFunc(const std::string &data) {
-//     int temp = 0;
-//     int allSum = 0;
-//     for (int i = 0; i < data.size(); i++) {
-//         temp = data[i];
-//         allSum += temp;
-//     }
-//     return allSum;
-// }
-
-#include <algorithm>
+/**
+ *
+ * Manual implementation
+ * we have multiple string ans has to find given string in O(1)
+ * considering no all distict string (not dealing if collision occur)
+ *
+ */
+#include <cstdint>
 #include <iostream>
-#include <map>
-
+#include <typeinfo>
+#include <unordered_map>
+class Hashing {
+   public:
+    // this will give the hash value of string
+    uint32_t hashFn(const std::string &str);
+};
 int main() {
-    std::multimap<int, std::string> m;
-    m.insert({10, "one"});
-    m.insert({20, "two"});
-    m.insert({30, "three"});
-    m.insert({10, "one"});
-    // reverse(m.begin(), m.end());
-    for (auto i = m.begin(); i != m.end(); i++) {
-        std::cout << i->first << "  " << i->second << "\n";
+    const std::string name[] = {"ali", "saba", "noor", "khan", "saleem", "nawab"};
+    int size = sizeof(name) / sizeof(name[0]);
+    Hashing *instance = new Hashing();
+    std::unordered_map<int, std::string> data;
+    for (int i = 0; i < size; ++i) {
+        uint32_t key = instance->hashFn(name[i]);
+        data.insert({key, name[i]});
+    }
+    for (auto i : data) {
+        std::cout << i.first << "  " << i.second << "\n";
     }
 
+    // user intraction
+    std::cout << "Enter string : ";
+    std::string in;
+    std::cin >> in;
+    uint32_t key = instance->hashFn(in);
+    std::cout << data[key] << "\n";
+
     return 0;
+}
+uint32_t Hashing::hashFn(const std::string &str) {
+    uint32_t value = 0;
+    for (int i = 0; i < str.size(); ++i) {
+        value += (int)str[i];
+    }
+    return value;
 }
