@@ -1,4 +1,4 @@
-// In Binary tree(Not BST) insertion of new node is done always from left nost child ans then right
+// In Binary tree(Not BST) insertion of new node is done always from left most child and then right
 // Note : Anywhere (random) is not possible for now
 
 #include <iostream>
