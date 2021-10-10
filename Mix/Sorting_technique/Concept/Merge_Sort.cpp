@@ -1,21 +1,28 @@
-#include <bits/stdc++.h>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
+// void partition(int* a, int low, int high);
 
-void merge_sort(int* arr, int low, int high);
-void merge_theme();
-int main() {
-    int a[] = {2, 7, 5, 9, 2, 1, 4, 6, 8, 3};
-    int n = sizeof(a) / sizeof(a[0]);
+// int main() {
+//     srand(time(0));
+//     const int size = 12;
+//     int a[size];
+//     for (int i = 0; i < size; ++i) {
+//         a[i] = rand() % 100;
+//     }
+//     for (int i = 0; i < size; ++i) {
+//         cout << a[i] << " ";
+//     }
 
-    return 0;
-}
-void merge_sort(int* arr, int low, int high) {
-    if (low >= high) {
-        return;
-    }
-    int mid = low + (high - low) / 2;
-    merge_sort(arr, low, mid);
-    merge_sort(arr, mid + 1, high);
-    merge_theme()
-}
-void merge_theme() {}
+//     return 0;
+// }
+// void partition(int* a, int low, int high) {
+//     int mid = low + (high - low) / 2;
+//     if (high >= low) {
+//         return;
+//     }
+//     if (high & 1) {  // Odd
+//         partition(a, low, mid);
+//     } else {
+//         partition(a, mid + 1, high);
+//     }
+// }
