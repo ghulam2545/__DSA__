@@ -1,7 +1,6 @@
 /**
- *
- *
- *
+ * Problem :
+ * Basic sorting technique
  *
  */
 #include <bits/stdc++.h>
@@ -17,8 +16,10 @@ struct Sort {
     void bubble_sort(int* a, const int& size);
     void insertion_sort(int* a, const int& size);
     void selection_sort(int* a, const int& size);
-    void quick_sort();
     void set_sort(int* a, const int size);
+    void quick_sort(int* start, int* end);
+    int* partition(int* start, int* end);
+    void merge_sort();
 };
 int main() {
     Sort ss;
@@ -47,6 +48,9 @@ Sort::Sort() {
     print();
     cout << "\n\nDoing set sort : \n";
     set_sort(arr, size);
+    print();
+    cout << "\n\nDoing quick sort : \n";
+    quick_sort(arr, arr + 12);
     print();
     cout << "\n";
 }
@@ -92,4 +96,22 @@ void Sort::set_sort(int* a, const int size) {
         ans.insert(a[i]);
     }
 }
-void Sort::quick_sort() {}
+void Sort::quick_sort(int* start, int* end) {
+    if (start >= end) return;
+    int* index = partition(start, end);
+    quick_sort(start, index - 1);
+    quick_sort(index + 1, end);
+}
+int* Sort::partition(int* start, int* end) {
+    int pivotElement = *end;
+    int* pIndex = start;
+    for (auto i = start; i <= end - 1; i++) {
+        if (*i <= pivotElement) {
+            std::swap(*i, *pIndex);
+            pIndex++;
+        }
+    }
+    std::swap(*end, *pIndex);
+    return pIndex;
+}
+void Sort::merge_sort() {}

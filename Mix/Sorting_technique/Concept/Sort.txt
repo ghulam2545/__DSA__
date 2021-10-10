@@ -1,4 +1,4 @@
-Sortinh Algorithm---
+Sorting Algorithm---
 
 --> Selection Sort :
 select minium element from left hand and shift this in right hand, again select minium element (form remaining element) and shift to hand (at the end);
@@ -13,3 +13,4 @@ first element consider as sorted and remaining as unsorted, pick first element f
 
 
 --> Merge Sort :
+--> Quick Sort :
