@@ -1,67 +1,65 @@
-// Not working
-
+#include <cstdint>
 #include <ctime>
 #include <iostream>
-#include <vector>
 using namespace std;
-void mergeSort(int* a, int low, int high);
-void merge(int* a, int low, int mid, int high);
+
+void MergeSort(int* arr, int low, int high);
+void merge(int* arr, int low, int mid, int high);
 int main() {
     srand(time(0));
     const int size = 12;
-    int a[size];
-    for (size_t i = 0; i < size; ++i) {
-        a[i] = rand() % 100;
+    int arr[size];
+    for (size_t i = 0; i < 12; ++i) {
+        arr[i] = rand() % 100;
     }
-    for (size_t i = 0; i < size; ++i) {
-        cout << a[i] << " ";
+    cout << "unsorted data : \n";
+    for (size_t i = 0; i < 12; ++i) {
+        cout << arr[i] << " ";
     }
-    cout << "\n\n";
-    mergeSort(a, 0, 11);
-    for (size_t i = 0; i < size; ++i) {
-        cout << a[i] << " ";
+    cout << "\n\nsorted data : \n";
+    MergeSort(arr, 0, 11);
+    for (size_t i = 0; i < 12; ++i) {
+        cout << arr[i] << " ";
     }
-
     return 0;
 }
-void mergeSort(int* a, int low, int high) {
-    if (high > low) return;
-    int mid = low + (high - low) / 2;
-    mergeSort(a, low, mid);
-    mergeSort(a, mid + 1, high);
-    merge(a, low, mid, high);
+void MergeSort(int* arr, int low, int high) {
+    if (low < high) {
+        int mid = low + (high - low) / 2;
+        MergeSort(arr, low, mid);
+        MergeSort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
+    }
 }
-void merge(int* a, int low, int mid, int high) {
-    vector<int> arr1;
-    vector<int> arr2;
-    for (int i = 0; i < mid; ++i) {
-        arr1.push_back(a[i]);
-    }
-    for (int j = mid; j < high; ++j) {
-        arr2.push_back(a[j]);
-    }
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while (i < arr1.size() && j < arr2.size()) {
-        if (arr1[i] < arr2[j]) {
-            a[k] = arr1[i];
-            k += 1;
-            i += 1;
+void merge(int* arr, int low, int mid, int high) {
+    int n1 = mid - low + 1;
+    int n2 = high - mid;
+    int left[n1], right[n2];
+
+    for (int i = 0; i < n1; i++) left[i] = arr[low + i];
+    for (int j = 0; j < n2; j++) right[j] = arr[mid + 1 + j];
+    int i, j, k;
+    i = 0;
+    j = 0;
+    k = low;
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j]) {
+            arr[k] = left[i];
+            i++;
         } else {
-            a[k] = arr2[j];
-            k += 1;
-            j += 1;
+            arr[k] = right[j];
+            j++;
         }
+        k++;
     }
-    while (i < arr1.size()) {
-        a[k] = arr1[i];
-        k += 1;
-        i += 1;
+    while (i < n1) {
+        arr[k] = left[i];
+        i++;
+        k++;
     }
-    while (j < arr2.size()) {
-        a[k] = arr2[j];
-        k += 1;
-        j += 1;
+    while (j < n2) {
+        arr[k] = right[j];
+        j++;
+        k++;
     }
 }

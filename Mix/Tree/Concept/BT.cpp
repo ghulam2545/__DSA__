@@ -1,4 +1,4 @@
-// Read article/prob form gfg and implement
+// Read article/prob from gfg and implement
 
 #include <cmath>
 #include <iostream>
