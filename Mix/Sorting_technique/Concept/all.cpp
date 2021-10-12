@@ -19,7 +19,8 @@ struct Sort {
     void set_sort(int* a, const int size);
     void quick_sort(int* start, int* end);
     int* partition(int* start, int* end);
-    void merge_sort();
+    void merge_sort(int* a, int low, int high);
+    void merge(int* a, int low, int mid, int high);
 };
 int main() {
     Sort ss;
@@ -51,6 +52,9 @@ Sort::Sort() {
     print();
     cout << "\n\nDoing quick sort : \n";
     quick_sort(arr, arr + 12);
+    print();
+    cout << "\n\nDoing merge sort : \n";
+    merge_sort(arr, 0, 11);
     print();
     cout << "\n";
 }
@@ -114,4 +118,44 @@ int* Sort::partition(int* start, int* end) {
     std::swap(*end, *pIndex);
     return pIndex;
 }
-void Sort::merge_sort() {}
+void Sort::merge_sort(int* a, int low, int high) {
+    if (low < high) {
+        int mid = low + (high - low) / 2;
+        merge_sort(a, low, mid);
+        merge_sort(a, mid + 1, high);
+        merge(a, low, mid, high);
+    }
+}
+void Sort::merge(int* a, int low, int mid, int high) {
+    int size1 = mid - low + 1;
+    int size2 = high - mid;
+    int left[size1];
+    int right[size2];
+    for (int i = 0; i < size1; ++i) {
+        left[i] = a[low + i];
+    }
+    for (int i = 0; i < size2; ++i) {
+        right[i] = a[mid + 1 + i];
+    }
+    int i = 0, j = 0, k = low;
+    while (i < size1 && j < size2) {
+        if (left[i] <= right[j]) {
+            a[k] = left[i];
+            ++i;
+        } else {
+            a[k] = right[j];
+            ++j;
+        }
+        ++k;
+    }
+    while (i < size1) {
+        a[k] = left[i];
+        ++i;
+        ++k;
+    }
+    while (j < size2) {
+        a[k] = right[j];
+        ++j;
+        ++k;
+    }
+}
