@@ -21,7 +21,7 @@ struct Sort {
     int partition_first(T* arr, const int& low, const int& high);   // (Hoare_partition_scheme)  by considering first element as pivot
     int partition_last(T* arr, const int& low, const int& high);    // (Lomuto_partition_scheme)  by considering last element as pivot
     int partition_random(T* arr, const int& low, const int& high);  // quick sort by considering random element as pivot
-    int partition(T* arr, const int& low, const int& high);         //------
+    int partition(T* arr, const int& low, const int& high);         //------ (seg fault)
 };
 int main() {
     srand(time(0));
