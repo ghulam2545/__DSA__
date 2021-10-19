@@ -14,3 +14,17 @@ first element consider as sorted and remaining as unsorted, pick first element f
 
 --> Merge Sort :
 --> Quick Sort :
+
+
+
+these problem can be solved by using (merge sort, quick sort) technique
+
+// Given a binary array, sort it in linear time and constant space. The output should print all zeroes, followed by all ones.
+
+// Given an array of positive and negative integers, segregate them in linear time and constant space. The output should print
+// all negative numbers, followed by all positive numbers.
+
+// Given an integer array, rearrange it such that it contains positive and negative numbers at alternate positions.
+// If the array contains more positive or negative elements, move them to the end of the array.
+
+// Given an integer array, move all zeros present in it to the end. The solution should maintain the relative order of items in the array.
