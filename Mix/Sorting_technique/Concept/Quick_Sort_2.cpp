@@ -1,5 +1,5 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 int data[] = {12, 67, 34, 89, 44, 23, 47, 67, 54, 33, 30};
 int size = sizeof(data) / sizeof(data[0]);
 int* partition(int* start, int* end);
@@ -7,12 +7,12 @@ void QuickSort(int* start, int* end);
 void print();
 
 int main() {
-	print();
-	std::cout<<"\n\n";
-	int* a = data, *b = &data[size-1];
-	QuickSort(a, b);
-	print();
-	
+    print();
+    std::cout << "\n\n";
+    int *a = data, *b = &data[size - 1];
+    QuickSort(a, b);
+    print();
+
     return 0;
 }
 
