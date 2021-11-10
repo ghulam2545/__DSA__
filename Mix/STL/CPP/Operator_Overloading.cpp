@@ -8,7 +8,7 @@ class Superman {
    public:
     void Make_Superman(int selfPower, int equiPower);
     Superman operator+(Superman newMan);  // Binary operator overloading -- one parameter
-    Superman operator-();  // Unary operator overloading -- no parameter
+    Superman operator-();                 // Unary operator overloading -- no parameter
     void show();
 };
 int main() {
@@ -20,11 +20,10 @@ int main() {
     Superman mySuperMan;
     mySuperMan = spiderman + antman;  // FOCUS  ------- + operator, adding non primitive data type.
     mySuperMan.show();
-    std::cout<<"\n\n";
-    
-    
+    std::cout << "\n\n";
+
     Superman negMan;
-    negMan = - antman;
+    negMan = -antman;
     negMan.show();
     return EXIT_SUCCESS;
 }
