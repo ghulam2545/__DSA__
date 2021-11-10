@@ -15,39 +15,74 @@ namespace solve {
             year = y;
         }
     };
-    // struct Complex {
-    //     int real;
-    //     int imaginary;
-    //     Complex(int r, int i);
-    // };
+    struct Complex {
+        int real;
+        int imaginary;
+        Complex(int r = 0, int i = 0) {
+            real = r;
+            imaginary = i;
+        }
+    };
 
-    // data member
+    // date member
     inline bool operator==(Date a, Date b) { return a.day == b.day && a.month == b.month && a.year == b.year; }  // equility
-    // inline bool operator!=(Date a, Date b);  // ineqaulity
-    // inline bool operator<(Date a, Date b);   // less than
-    // inline bool operator<=(Date a, Date b);  // less than or equal to
-    // inline bool operator>(Date a, Date b);   // greater than
-    // inline bool operator>=(Date a, Date b);  // greator than or equal to
-    // constexpr Date& operator++(Date d);
-    // constexpr Date& operator--(Date d);
-    Date& operator+(Date a) {
-        Date temp;
-        temp.day = this->day + a.day;
+    inline bool operator!=(Date a, Date b) { return a.day != b.day || a.month != b.month || a.year != b.year; }  // ineqaulity
+    inline bool operator<(Date a, Date b) { return a.day < b.day || a.month < b.month || a.year < b.year; }      // less than
+    inline bool operator<=(Date a, Date b) { return a.day <= b.day && a.month <= b.month && a.year <= b.year; }  // less than or equal to
+    inline bool operator>(Date a, Date b) { return a.day > b.day || a.month > b.month || a.year > b.year; }      // greater than
+    inline bool operator>=(Date a, Date b) { return a.day >= b.day && a.month >= b.month && a.year >= b.year; }  // greator than or equal to
+    Date& operator++(Date& d) {
+        ++d.day;
+        return d;
     }
-    // constexpr Date& operator-(Date a, Date b);
-    // constexpr Date& operator+=(Date d);
-    // constexpr Date& operator-=(Date d);
-    // constexpr Date& operator+(Date d, int day);
-    // constexpr Date& operator+(Date d, int month);
-    // constexpr Date& operator+(Date d, int year);
-    // constexpr Date& operator-(Date d, int day);
-    // constexpr Date& operator-(Date d, int month);
-    // constexpr Date& operator-(Date d, int year);
-
+    Date& operator--(Date& d) {
+        --d.day;
+        return d;
+    }
+    Date& operator+(Date a, Date b) {
+        // ......
+        static Date d;
+        d.day = a.day + b.day;
+        d.month = a.month + b.month;
+        d.year = a.year + b.year;
+        return d;
+    }
+    Date& operator-(Date a, Date b) {
+        // ......
+        static Date d;
+        d.day = a.day - b.day;
+        d.month = a.month - b.month;
+        d.year = a.year - b.year;
+        return d;
+    }
+    Date& operator+=(Date& a, Date b) {
+        // ......
+        a.day += b.day;
+        a.month += b.month;
+        a.year += b.year;
+        return a;
+    }
+    Date& operator-=(Date& a, Date b) {
+        // ......
+        a.day -= b.day;
+        a.month -= b.month;
+        a.year -= b.year;
+        return a;
+    }
     std::ostream& operator<<(std::ostream&, Date d) { std::cout << d.day << "/" << d.month << "/" << d.year; }
     std::istream& operator>>(std::istream&, Date& d) { std::cin >> d.day >> d.month >> d.year; }
 
     // complex member
+    // ......
+    inline bool operator==(Complex a, Complex b) { return a.real == b.real && a.imaginary == b.imaginary; }
+    inline bool operator!=(Complex a, Complex b) { return a.real != b.real || a.imaginary != b.imaginary; }
+    inline bool operator<(Complex a, Complex b) { return a.real < b.real || a.imaginary < b.imaginary; }
+    inline bool operator<=(Complex a, Complex b) { return a.real <= b.real && a.imaginary <= b.imaginary; }
+    inline bool operator>(Complex a, Complex b) { return a.real > b.real || a.imaginary > b.imaginary; }
+    inline bool operator>=(Complex a, Complex b) { return a.real >= b.real && a.imaginary >= b.imaginary; }
+
+    std::ostream& operator<<(std::ostream&, Complex c) { std::cout << c.real << "+" << c.imaginary << "i"; }
+    std::istream& operator>>(std::istream&, Complex c) { std::cin >> c.real >> c.imaginary; }
 
 }  // namespace solve
 

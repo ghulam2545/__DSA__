@@ -5,9 +5,11 @@ using namespace std;
 using namespace solve;
 
 int main() {
-    Date d1{11, 11, 11};
-    Date d2{12, 12, 12};
-    cout << d1 << "\n" << d2 << "\n";
-    cout << (d1 == d2);
+    Complex c{2, 3};
+    Complex d{3, 2};
+    cout << c << "\n" << d << "\n";
+    cout << (c == d) << "\n";
+    cout << (c != d) << "\n";
+    cout << (c >= d) << "\n";
     return 0;
 }
