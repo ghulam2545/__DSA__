@@ -1,4 +1,4 @@
-// dijk algo sssp
+// mst for kruskal
 
 #include <iostream>
 #include <queue>
@@ -10,14 +10,13 @@ class master {
    public:
     vector<pair<int, int>>* create(const int& n, const int& m);
     vector<pair<int, int>>* addEdge(const int& src, const int& des, const int& weight);
-    int* dijk(vector<pair<int, int>>* gg, const int& src);
     void print(vector<pair<int, int>>* out);
+    vector<pair<int, int>>* kruskal(vector<pair<int, int>>* gg);
 
    private:
     int vertex;
     int edges;
     vector<pair<int, int>>* ls;
-    bool* visited;
     int* dist;
 };
 int main() {
@@ -31,13 +30,7 @@ int main() {
         cin >> p >> q >> w;
         myG = oo->addEdge(p, q, w);
     }
-
-    // oo->print(myG);
-    int* ans = oo->dijk(myG, 0);
-    for (int i = 0; i < n; ++i) {
-        cout << i << "  " << *(ans + i) << "\n";
-    }
-
+    oo->print(myG);
     cout << "\nend";
     return 0;
 }
@@ -68,24 +61,8 @@ void master::print(vector<pair<int, int>>* out) {
         cout << "\n";
     }
 }
-
-int* master::dijk(vector<pair<int, int>>* gg, const int& src) {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> qq;
-    qq.push(make_pair(0, src));
-    dist[src] = 0;
-    while (qq.size()) {
-        int weight = qq.top().first;
-        int node = qq.top().second;
-        qq.pop();
-        // relaxtation
-        for (auto e : gg[node]) {
-            if (weight + e.second < dist[e.first]) {
-                dist[e.first] = weight + e.second;
-                qq.push(make_pair(e.second, e.first));
-            }
-        }
-    }
-    return dist;
+vector<pair<int, int>>* master::kruskal(vector<pair<int, int>>* gg) {
+    // wait
 }
 
 /*
