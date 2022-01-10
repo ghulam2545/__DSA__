@@ -12,19 +12,19 @@ class Superman {
     void show();
 };
 int main() {
-    Superman spiderman;
-    spiderman.Make_Superman(20, 30);
-    Superman antman;
-    antman.Make_Superman(100, 120);
+    // Superman spiderman;
+    // spiderman.Make_Superman(20, 30);
+    // Superman antman;
+    // antman.Make_Superman(100, 120);
 
-    Superman mySuperMan;
-    mySuperMan = spiderman + antman;  // FOCUS  ------- + operator, adding non primitive data type.
-    mySuperMan.show();
-    std::cout << "\n\n";
+    // Superman mySuperMan;
+    // mySuperMan = spiderman + antman;  // FOCUS  ------- + operator, adding non primitive data type.
+    // mySuperMan.show();
+    // std::cout << "\n\n";
 
-    Superman negMan;
-    negMan = -antman;
-    negMan.show();
+    // Superman negMan;
+    // negMan = -antman;
+    // negMan.show();
     return EXIT_SUCCESS;
 }
 
