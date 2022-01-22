@@ -4,6 +4,7 @@ class master {
    public:
     bool** create(const int& n, const int& sum);
     bool isSubset(bool** matt, int* arr, const int& n, const int& sum);
+    void print();
     // Bad thing is that I am not releasing memory (Will do it later)
     ~master();
 
@@ -46,11 +47,29 @@ bool master::isSubset(bool** matt, int* arr, const int& n, const int& sum) {
             if (j >= arr[i - 1]) matt[i][j] = matt[i - 1][j] || matt[i - 1][j - arr[i - 1]];
         }
     }
+    for (int i = 0; i <= n; ++i) {
+        for (int j = 0; j <= n; ++j) {
+            cout << matt[i][j] << " ";
+        }
+        cout << "\n";
+    }
     return matt[n][sum];
+}
+
+void master::print() {
+    // for (int i = 0; i < n; ++i) {
+    //     for (int j = 0; j < n; ++j) {
+    //         cout << matrix[i][j] << " ";
+    //     }
+    // }
 }
 
 /*
 6
 3 34 4 12 11 3
 9
+
+9
+81 80 43 40 30 26 12 11 9
+100
 */
