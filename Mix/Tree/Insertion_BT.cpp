@@ -9,63 +9,57 @@ class Node {
     int data;
     Node* left;
     Node* right;
-    public:
+
+   public:
     Node* getNewNode(int val);
     Node* insertNode(Node* root, int insertVal);
     void levelOrder(Node* root);
     void inorder(Node* root);
 
-	void postorderIterative(Node* root)
-{
-    stack<Node*> s;
-    s.push(root);
-    stack<int> out;
-    while (!s.empty())
-    {
-        Node* curr = s.top();
-        s.pop();
- 
-        
-		
-		out.push(curr->data);
-        if (curr->left) {
-            s.push(curr->left);
+    void postorderIterative(Node* root) {
+        stack<Node*> s;
+        s.push(root);
+        stack<int> out;
+        while (!s.empty()) {
+            Node* curr = s.top();
+            s.pop();
+
+            out.push(curr->data);
+            if (curr->left) {
+                s.push(curr->left);
+            }
+
+            if (curr->right) {
+                s.push(curr->right);
+            }
         }
- 
-        if (curr->right) {
-            s.push(curr->right);
+        while (!out.empty()) {
+            cout << out.top() << " ";
+            out.pop();
         }
     }
-    while (!out.empty())
-    {
-        cout << out.top() << " ";
-        out.pop();
-    }
-}
 };
 int main() {
     Node* head = NULL;
     Node* oo = new Node();
     oo->levelOrder(head);
-    cout<<"\n";
+    cout << "\n";
     head = oo->insertNode(head, 20);
     oo->levelOrder(head);
-    cout<<"\n";
+    cout << "\n";
     head = oo->insertNode(head, 5);
     head = oo->insertNode(head, 70);
     head = oo->insertNode(head, 10);
     head = oo->insertNode(head, 25);
     head = oo->insertNode(head, 9);
-    
-    
+
     oo->levelOrder(head);
-    cout<<"\n\n";
+    cout << "\n\n";
     oo->inorder(head);
-    cout<<"fioor \n";
+    cout << "fioor \n";
     oo->postorderIterative(head);
-    
-    
-	return 0;
+
+    return 0;
 }
 
 Node* Node::getNewNode(int val) {
@@ -76,47 +70,43 @@ Node* Node::getNewNode(int val) {
     return node;
 }
 Node* Node::insertNode(Node* root, int insertVal) {
-    if(root == NULL) {
+    if (root == NULL) {
         root = getNewNode(insertVal);
-    }
-    else {
+    } else {
         std::queue<Node*> storage;
         storage.push(root);
-        while(storage.size()) {
+        while (storage.size()) {
             Node* temp = storage.front();
             storage.pop();
-            if(temp->left != NULL) {
+            if (temp->left != NULL) {
                 storage.push(temp->left);
-            }
-            else {
+            } else {
                 temp->left = getNewNode(insertVal);
                 return root;
             }
-            if(temp->right != NULL) {
+            if (temp->right != NULL) {
                 storage.push(temp->right);
-            }
-            else {
+            } else {
                 temp->right = getNewNode(insertVal);
-            	return root;
-			}
+                return root;
+            }
         }
     }
 }
 void Node::levelOrder(Node* root) {
-    if(root == NULL) {
-        cout<<"Empty ";
-        return ;
-    }
-    else {
+    if (root == NULL) {
+        cout << "Empty ";
+        return;
+    } else {
         std::queue<Node*> st;
         st.push(root);
-        while(!st.empty()) {
+        while (!st.empty()) {
             Node* temp = st.front();
-            cout<<temp->data<<" ";
-            if(temp->left != NULL) {
+            cout << temp->data << " ";
+            if (temp->left != NULL) {
                 st.push(temp->left);
             }
-            if(temp->right != NULL) {
+            if (temp->right != NULL) {
                 st.push(temp->right);
             }
             st.pop();

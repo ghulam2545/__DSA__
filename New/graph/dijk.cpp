@@ -74,14 +74,15 @@ int* master::dijk(vector<pair<int, int>>* gg, const int& src) {
     qq.push(make_pair(0, src));
     dist[src] = 0;
     while (qq.size()) {
-        int weight = qq.top().first;
-        int node = qq.top().second;
+        int u = qq.top().second;
         qq.pop();
         // relaxtation
-        for (auto e : gg[node]) {
-            if (weight + e.second < dist[e.first]) {
-                dist[e.first] = weight + e.second;
-                qq.push(make_pair(e.second, e.first));
+        for (auto e : gg[u]) {
+            auto v = e.first;
+            auto wt = e.second;
+            if (dist[u] + wt < dist[v]) {
+                dist[v] = dist[u] + wt;
+                qq.push(make_pair(dist[v], v));
             }
         }
     }

@@ -4,7 +4,7 @@ int partition(int *arr, int start, int end);
 void quickSort(int *arr, int start, int end);
 int main() {
     int a[] = {12, 67, 54, 90, 56, 11, 77, 34, 52, 44, 10};
-    int n = sizeof(a)/sizeof(a[0]);
+    int n = sizeof(a) / sizeof(a[0]);
     quickSort(a, 0, n - 1);
     for (int i = 0; i < n; i++) {
         cout << a[i] << " ";
@@ -30,6 +30,11 @@ void quickSort(int *arr, int start, int end) {
         return;
     }
     int pIndex = partition(arr, start, end);
+
+    for (int i = 0; i <= end; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
     quickSort(arr, start, pIndex - 1);
     quickSort(arr, pIndex + 1, end);
 }

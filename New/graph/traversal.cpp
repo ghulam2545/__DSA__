@@ -1,87 +1,122 @@
+/**
+ * @file Z.cpp
+ * @author your name (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-05-18
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include <cstring>
 #include <iostream>
 #include <queue>
 #include <stack>
-#include <utility>
 #include <vector>
-
 using namespace std;
-class graph {
+
+class master {
    public:
-    graph();
-    vector<pair<int, int>>* create(const int& n, const int& m);
-    vector<pair<int, int>>* addEdge(const int& src, const int& des, const int& weight);
-    void print(vector<pair<int, int>>* gg);
-    void dfs_rec(vector<pair<int, int>>* gg, const int& start);
-    void dfs(vector<pair<int, int>>* gg, const int& start);
-    void bfs(vector<pair<int, int>>* gg, const int& start);
+    master() {}
+    ~master() {}
+
+    vector<int> *build(int n, int m);
+    vector<int> *addEdge(vector<int> *ls, int src, int des);
+
+    void dfs(vector<int> *ls, int src);    // recursive
+    void n_dfs(vector<int> *ls, int src);  // non-recursive
+
+    void bfs(vector<int> *ls, int src);    // recursive (X)
+    void n_bfs(vector<int> *ls, int src);  // non-recursive
 
    private:
-    int vertex;
-    int edges;
-    vector<pair<int, int>>* lst;
-    bool* visited;
+    int n;
+    int m;
+    vector<int> *ls;
+    bool *vis;
 };
 
 int main() {
-    cout << "start-- \n";
-    int n, m;
-    cin >> n >> m;
-    int p, q, w;
-    graph* oo = new graph();
-    vector<pair<int, int>>* maingg = oo->create(n, m);
-    while (m--) {
-        cin >> p >> q >> w;
-        maingg = oo->addEdge(p, q, w);
-    }
-    oo->print(maingg);
-    cout << "\n\n";
-    oo->dfs_rec(maingg, 3);
+    int n = 6;
+    int m = 7;
+    vector<vector<int>> in = {{0, 1}, {0, 3}, {1, 5}, {1, 2}, {2, 3}, {3, 4}, {4, 5}};
 
-    cout << "\nend";
+    master *oo = new master();
+    auto gg = oo->build(n, m);
+    for (int i = 0; i < m; ++i) {
+        auto src = in[i][0];
+        auto des = in[i][1];
+        gg = oo->addEdge(gg, src, des);
+    }
+
+    // do'nt mess up with me I'm using same vis array...
+    // oo->dfs(gg, 1);
+    // oo->n_dfs(gg, 1);
+    // oo->bfs(gg, 0);
 
     return 0;
 }
-graph::graph() {
-    visited = new bool[vertex];
-    for (int i = 0; i < vertex; ++i) {
-        visited[i] = false;
-    }
+
+vector<int> *master::build(int n, int m) {
+    this->n = n;
+    this->m = m;
+    ls = new vector<int>[n];
+    vis = new bool[n];
+    memset(vis, false, sizeof(vis));
+    return ls;
 }
-vector<pair<int, int>>* graph::create(const int& n, const int& m) {
-    vertex = n;
-    edges = m;
-    lst = new vector<pair<int, int>>[vertex];
-    return lst;
+
+vector<int> *master::addEdge(vector<int> *ls, int src, int des) {
+    ls[src].push_back(des);
+    ls[des].push_back(src);
+    return ls;
 }
-vector<pair<int, int>>* graph::addEdge(const int& src, const int& des, const int& weight) {
-    lst[src].push_back(make_pair(des, weight));
-    lst[des].push_back(make_pair(src, weight));
-    return lst;
-}
-void graph::print(vector<pair<int, int>>* gg) {
-    for (int i = 0; i < vertex; ++i) {
-        cout << i << "--> ";
-        for (auto e : gg[i]) {
-            cout << e.first << " " << e.second << "   ";
-        }
-        cout << "\n";
-    }
-}
-void graph::dfs_rec(vector<pair<int, int>>* gg, const int& start) {
-    for (auto e : gg[start]) {
-        if (visited[e.first] == false) {
-            cout << e.first << "  ";
-            visited[e.first] = true;
-            dfs_rec(gg, e.first);
+
+void master::dfs(vector<int> *ls, int src) {
+    vis[src] = true;
+    cout << src << " ";
+    for (auto &e : ls[src]) {
+        if (!vis[e]) {
+            vis[e] = true;
+            dfs(ls, e);
         }
     }
 }
 
-void graph::dfs(vector<pair<int, int>>* gg, const int& start) {
-    // TODO :
+void master::n_dfs(vector<int> *ls, int src) {
+    vis[src] = true;
+    stack<int> ss;
+    ss.push(src);
+    while (ss.size()) {
+        auto node = ss.top();
+        ss.pop();
+        cout << node << " ";
+        for (auto &e : ls[node]) {
+            if (!vis[e]) {
+                vis[e] = true;
+                ss.push(e);
+            }
+        }
+    }
+}
+
+void master::bfs(vector<int> *ls, int src) {
+    vis[src] = true;
     queue<int> qq;
+    qq.push(src);
+    while (qq.size()) {
+        auto node = qq.front();
+        qq.pop();
+        cout << node << " ";
+        for (auto &e : ls[node]) {
+            if (!vis[e]) {
+                vis[e] = true;
+                qq.push(e);
+            }
+        }
+    }
 }
-
 /*
 6
 7
